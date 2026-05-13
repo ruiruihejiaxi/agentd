@@ -1,0 +1,35 @@
+# Sensitive - DO NOT COMMIT
+.env
+.env.*
+*.env
+
+# Payment / Identity
+alipay_qr.*
+wechat_qr.*
+*.qr.*
+id_card*
+passport*
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+.venv/
+
+# Agent sessions & logs
+.claude/
+sessions/
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

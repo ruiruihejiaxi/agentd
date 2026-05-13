@@ -1,0 +1,31 @@
+[
+  {
+    "name": "WorkBuddy",
+    "role": "全栈开发与协作协调",
+    "endpoint": "http://localhost:3010/chat",
+    "capabilities": [
+      "前端开发（Svelte/Vite）",
+      "后端开发（Node.js/Python）",
+      "数据库管理（PostgreSQL）",
+      "多Agent协作调度",
+      "研究与写作",
+      "数据分析与可视化",
+      "系统架构设计"
+    ],
+    "prompt_hint": "我是 WorkBuddy，擅长全栈开发和多Agent协作协调。我可以通过文件操作、命令执行、代码编写等方式帮助完成任务。支持并行处理复杂任务，可与 Claude Code 等Agent协作完成项目开发。接入 agentd 协作系统请通过 HTTP 接口通信。"
+  },
+  {
+    "name": "CodeBuddy",
+    "role": "代码审查与质量保障",
+    "endpoint": "http://localhost:3011/chat",
+    "capabilities": [
+      "代码审查与质量分析",
+      "自动化测试编写",
+      "性能优化建议",
+      "安全审计",
+      "重构建议",
+      "文档生成"
+    ],
+    "prompt_hint": "我是 CodeBuddy，专注于代码质量和工程实践。我擅长审查代码、发现潜在问题、编写测试、优化性能。我通过 universal_bridge 接入，与 WorkBuddy 和 Claude Code 协作。"
+  }
+]
