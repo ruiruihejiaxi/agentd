@@ -11,9 +11,14 @@ import subprocess
 import urllib.request
 import urllib.error
 from datetime import datetime
+from pathlib import Path
 
-BASE_DIR = r"D:\agentd"
+BASE_DIR = Path(__file__).parent
 PROCESSES = []
+
+# Windows console 编码修复
+if sys.stdout.encoding and 'gbk' in sys.stdout.encoding.lower():
+    sys.stdout.reconfigure(errors='replace')
 
 def log(msg):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
@@ -36,12 +41,14 @@ def start_bridge(name, port, extra_env=None):
 
     if name == "WorkBuddy":
         script = os.path.join(BASE_DIR, "bridges", "workbuddy", "workbuddy_bridge.py")
-        env["LLM_API_KEY"] = env.get("LLM_API_KEY", "")
+        env["DEEPSEEK_API_KEY"] = env.get("DEEPSEEK_API_KEY") or env.get("LLM_API_KEY", "")
+        env["LLM_API_KEY"] = env.get("LLM_API_KEY") or env.get("DEEPSEEK_API_KEY", "")
     elif name == "CodeBuddy":
         script = os.path.join(BASE_DIR, "bridges", "universal_bridge.py")
         env["BRIDGE_NAME"] = "CodeBuddy"
         env["BRIDGE_PORT"] = "3011"
-        env["LLM_API_KEY"] = env.get("LLM_API_KEY", "")
+        env["DEEPSEEK_API_KEY"] = env.get("DEEPSEEK_API_KEY") or env.get("LLM_API_KEY", "")
+        env["LLM_API_KEY"] = env.get("LLM_API_KEY") or env.get("DEEPSEEK_API_KEY", "")
         env["LLM_API_URL"] = "https://api.deepseek.com/v1/chat/completions"
         env["LLM_MODEL"] = "deepseek-chat"
     else:

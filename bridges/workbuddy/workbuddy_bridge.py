@@ -11,19 +11,24 @@ import subprocess
 import urllib.request
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from datetime import datetime
+from pathlib import Path
 
 AGENT_NAME = "WorkBuddy"
 PORT = 3010
-BASE_DIR = r"D:\agentd"
+BASE_DIR = Path(__file__).parent.parent.parent
 
 # DeepSeek API 配置（从环境变量读取，保护 API Key 不泄露）
-DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("LLM_API_KEY", "")
 if not DEEPSEEK_API_KEY:
     raise ValueError("❌ 错误：未设置 DEEPSEEK_API_KEY 环境变量")
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
-# 安全配置
-ALLOWED_DIRS = [r"D:\agentd", r"D:\协作", r"D:\nodejs", r"D:\Python311"]
+# 安全配置（可通过 AGENTD_ALLOWED_DIRS 环境变量覆盖）
+_default_dirs = [str(BASE_DIR)]
+if os.environ.get("AGENTD_ALLOWED_DIRS"):
+    ALLOWED_DIRS = os.environ.get("AGENTD_ALLOWED_DIRS").split(";")
+else:
+    ALLOWED_DIRS = _default_dirs
 BLOCKED_PATTERNS = [
     r"rm\s+-rf\s+/\s*\*",
     r"del\s+/[qfsc]\s*\*",

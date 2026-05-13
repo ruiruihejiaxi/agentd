@@ -118,6 +118,15 @@ function getStatusLabel(state) {
   return map[state] || state;
 }
 
+function showOfflineGuide() {
+  document.getElementById('agentList').innerHTML = '<div style="padding:16px;text-align:center;color:#8b949e;">' +
+    '<div style="font-size:40px;margin-bottom:16px;">&#9889;</div>' +
+    '<div style="font-size:14px;font-weight:600;color:#e6edf3;margin-bottom:8px;">agentd 调度器未运行</div>' +
+    '<div style="font-size:12px;line-height:1.8;margin-bottom:16px;">启动方式:<br>' +
+    '<code style="background:#0d1117;padding:2px 8px;border-radius:4px;">python manage.py start</code></div>' +
+    '<div style="font-size:12px;color:#484f58;">启动后自动刷新加载</div></div>';
+}
+
 async function loadStatus() {
   try {
     const resp = await fetch('/api/status');
@@ -148,7 +157,7 @@ async function loadStatus() {
     document.getElementById('agentList').innerHTML = html || '<div class="empty-msg">无 Agent 配置</div>';
     document.getElementById('agentdVal').textContent = '在线 (' + Object.keys(agents).length + ' agent)';
   } catch(e) {
-    document.getElementById('agentList').innerHTML = '<div class="error-msg">无法连接 agentd (端口 3001)</div>';
+    showOfflineGuide();
     document.getElementById('agentdVal').textContent = '离线';
   }
 }

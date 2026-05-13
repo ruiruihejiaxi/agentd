@@ -7,8 +7,9 @@ import os
 import sys
 import json
 import subprocess
+from pathlib import Path
 
-BASE_DIR = r"D:\agentd"
+BASE_DIR = str(Path(__file__).parent.parent)
 
 def log(msg):
     print(f"  {msg}")

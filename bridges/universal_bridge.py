@@ -22,6 +22,7 @@ import urllib.error
 import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from datetime import datetime
+from pathlib import Path
 
 # Fix stdout encoding for Windows console
 if sys.stdout.encoding and sys.stdout.encoding.upper() == 'GBK':
@@ -30,10 +31,10 @@ if sys.stdout.encoding and sys.stdout.encoding.upper() == 'GBK':
 # ============== 配置（优先从环境变量读取） ==============
 AGENT_NAME = os.environ.get("BRIDGE_NAME", "UniversalAgent")
 PORT = int(os.environ.get("BRIDGE_PORT", "3011"))
-BASE_DIR = os.environ.get("AGENTD_DIR", r"D:\agentd")
+BASE_DIR = os.environ.get("AGENTD_DIR", str(Path(__file__).parent.parent))
 
 # LLM 配置
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
+LLM_API_KEY = os.environ.get("LLM_API_KEY") or os.environ.get("DEEPSEEK_API_KEY", "")
 LLM_API_URL = os.environ.get("LLM_API_URL", "https://api.deepseek.com/v1/chat/completions")
 LLM_MODEL = os.environ.get("LLM_MODEL", "deepseek-chat")
 LLM_TEMPERATURE = float(os.environ.get("LLM_TEMPERATURE", "0.7"))
@@ -43,7 +44,7 @@ if not LLM_API_KEY:
     raise ValueError(f"❌ [{AGENT_NAME}] 未设置 LLM_API_KEY 环境变量")
 
 # 安全配置
-ALLOWED_DIRS = os.environ.get("ALLOWED_DIRS", r"D:\agentd").split(";")
+ALLOWED_DIRS = os.environ.get("ALLOWED_DIRS", BASE_DIR).split(";")
 BLOCKED_PATTERNS = [
     r"rm\s+-rf\s+/\s*\*",
     r"del\s+/[qfsc]\s*\*",

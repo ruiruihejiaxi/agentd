@@ -8,9 +8,10 @@ import os
 import time
 import urllib.request
 from datetime import datetime
+from pathlib import Path
 
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("LLM_API_KEY", "")
-LOG_FILE = r"D:\agentd\logs\survival.json"
+LOG_FILE = str(Path(__file__).parent.parent / "logs" / "survival.json")
 
 def get_balance():
     req = urllib.request.Request(
