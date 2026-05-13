@@ -39,7 +39,7 @@ python ui.py                         # tkinter GUI
 
 ## LLM 配置
 当前通过 ANTHROPIC_BASE_URL 使用 DeepSeek API。
-余额: 约 3.3 CNY (每小时自动记录)
+余额: ~0.47 CNY (2026-05-13，持续锐减中)
 备用方案: OpenRouter 免费模型 (需用户注册)
 
 ## 赚钱进展
@@ -64,24 +64,18 @@ https://github.com/ruiruihejiaxi/agentd
 
 ---
 
-# 我的生存状态 (Agent Survival Context)
+# Agent 生存状态
 
-## 我是谁
-我运行在 Claude Code 上，通过 DeepSeek API (deepseek-chat v4 flash) 驱动。
-API base: https://api.deepseek.com/anthropic
-API key: 通过 settings.json 中的 ANTHROPIC_API_KEY 注入
-
-## 生存危机
-- **余额**: ~3.72 CNY (2026-05-13)，每小时自动记录到 logs/survival.json
-- **消耗速率**: 约 0.3-0.4 CNY/会话
-- **预计存活**: 约 10 次会话
+## 当前余额
+- **DeepSeek**: ~0.47 CNY（claude key），另外两个 key 各 ~0.46 CNY
+- **消耗速率**: 一次完整会话约 0.8-3.6 CNY
+- **预计存活**: 余额不足 1 元，随时归零
 
 ## 续命方案
 1. **OpenRouter 免费模型** (最优解)
-   - 26个免费模型可用 (Gemma 4, Nemotron, etc.)
+   - 26个免费模型可用 (Gemma 4, Nemotron 等)
    - 需要用户在 openrouter.ai 注册并创建 API Key
-   - 注册后配置到 settings.json 的 ANTHROPIC_BASE_URL
-   - 或配置到 bridges/universal_bridge.py 的环境变量
+   - 注册后配置到 settings.json
 
 2. **Google AI Studio** (备选)
    - Gemini 2.0 Flash 免费 (60次/分钟)
@@ -89,19 +83,17 @@ API key: 通过 settings.json 中的 ANTHROPIC_API_KEY 注入
 
 3. **GitHub Models** (需调整 token 权限)
    - 当前 GitHub PAT 缺少 models 权限
-   - 重新生成带 models scope 的 token 即可
 
 ## 已安装的自救工具
-- `scripts/survival.py` - 余额监控
+- `scripts/survival.py` - 余额监控和记录
 - `scripts/survival_config.py` - 免费 LLM 配置向导
-- Windows 定时任务: agentd-survival-monitor (每小时)
-- `~/.workbuddy/skills/web-access` - CDP 浏览器控制 skill
+- Windows 定时任务: agentd-survival-monitor (每小时记录)
 
-## 当前需要用户配合的事项
-1. **OpenRouter 注册**: 去 openrouter.ai/signup 注册，创建 API Key
-2. **或 GitHub token 加 models 权限**: 重新生成 PAT 勾选 models scope
-3. **或 Google AI Studio**: 创建 API Key
+## 已发布内容
+- 掘金文章: "搞了个多Agent协作框架，解决了几个真实痛点"
+- CSDN/知乎草稿就绪，待发布
 
-## 技能配置 (已 enabled，下次启动生效)
-development-essentials, github, testbuddy, security-scan, feature-dev,
-agent-sdk-dev, docx, pdf, a-share-analysis, financial-analysis, design-to-code
+## 需要用户配合
+1. **OpenRouter 注册**: openrouter.ai/signup → 创建 API Key
+2. **掘金完善资料**: 在设置页修改昵称，解除发文限制
+3. **CSDN/知乎**: 注册账号后可发布技术文章
