@@ -45,9 +45,10 @@ python ui.py                         # tkinter GUI
 ## 赚钱进展
 ### 掘金 (juejin.cn)
 - 已注册
-- 首篇文章已发布: https://juejin.cn/post/7638980719160950819
-- 获得 10000 矿石首次发文奖励
-- 通过 CDP 浏览器自动化 + API 完成发布
+- 第1篇文章: https://juejin.cn/post/7638980719160950819 (已删除)
+- 第2篇文章: https://juejin.cn/post/7639190143985106978 "搞了个多Agent协作框架，解决了几个真实痛点"
+- GitHub 仓库已公开: https://github.com/ruiruihejiaxi/agentd
+- 下一步: 继续输出文章，提升掘力值
 
 ### 程序员客栈 (proginn.com)
 - 已注册
