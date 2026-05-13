@@ -5,11 +5,13 @@
 """
 import sys
 import json
+import os
 import time
 import urllib.request
 import urllib.parse
 
 CDP_PROXY = "http://127.0.0.1:3456"
+PHONE = os.environ.get("AGENTD_PHONE", "")  # 通过环境变量 AGENTD_PHONE 设置
 
 def cdp_get(path):
     with urllib.request.urlopen(f"{CDP_PROXY}{path}", timeout=10) as r:
@@ -66,7 +68,7 @@ def register_juejin():
         for(let inp of inputs) {
             if(inp.type === 'tel' || inp.placeholder.includes('手机') || inp.type === 'text') {
                 let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-                nativeInputValueSetter.call(inp, '15330309682');
+                nativeInputValueSetter.call(inp, PHONE);
                 inp.dispatchEvent(new Event('input', {bubbles: true}));
                 inp.dispatchEvent(new Event('change', {bubbles: true}));
                 return 'filled: ' + inp.value;
@@ -104,7 +106,7 @@ def register_juejin():
         return False
 
     print(f"\n  === 请查收手机短信验证码 ===")
-    print(f"  手机号: 15330309682")
+    print(f"  手机号: {PHONE}")
     print(f"  收到验证码后输入以下命令继续:")
     print(f"  python auto_register.py juejin_code <验证码>")
     return True
