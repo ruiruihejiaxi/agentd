@@ -24,6 +24,14 @@ sessions/
 logs/
 *.log
 
+# Experimental scripts (not for commit)
+scripts/juejin_*.py
+scripts/check_*.py
+scripts/find_*.py
+scripts/test_*.py
+scripts/article_v2.py
+scripts/cdp_proxy.py
+
 # OS
 .DS_Store
 Thumbs.db
